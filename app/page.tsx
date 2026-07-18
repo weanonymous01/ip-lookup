@@ -177,7 +177,7 @@ export default function Home() {
                 <span className="animate-pulse" style={{ animationDelay: '0.2s' }}>•</span>
               </span>
             ) : (
-              'Lookup ↗'
+              'Lookup'
             )}
           </button>
         </div>
@@ -289,24 +289,39 @@ export default function Home() {
             <ThreatBadges proxy={result.proxy} hosting={result.hosting} mobile={result.mobile} />
 
             {/* Data Grid */}
-            <div
-              className="stagger-children"
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: 10,
-              }}
-            >
-              <ResultCard label="Country" value={`${result.country} (${result.countryCode})`} />
-              <ResultCard label="City" value={`${result.city}, ${result.regionName}`} />
-              <ResultCard label="Timezone" value={result.timezone} />
-              <ResultCard label="ISP" value={result.isp} />
-              <ResultCard label="ASN" value={result.as} />
-              <ResultCard label="Hostname / Reverse DNS" value={result.reverse || result.searchedHost || '—'} />
-              <ResultCard label="Resolved IP" value={result.query} />
-              <ResultCard label="Organization" value={result.org || result.asname || '—'} />
-              <ResultCard label="ZIP / Currency" value={`${result.zip || '—'} · ${result.currency}`} />
-            </div>
+            {result.searchedHost && /[a-zA-Z]/.test(result.searchedHost) ? (
+              <div
+                className="stagger-children"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: 10,
+                }}
+              >
+                <ResultCard label="Hostname / Reverse DNS" value={result.reverse || result.searchedHost || '—'} />
+                <ResultCard label="Resolved IP" value={result.query} />
+                <ResultCard label="Organization" value={result.org || result.asname || '—'} />
+                <ResultCard label="Country" value={`${result.country} (${result.countryCode})`} />
+                <ResultCard label="City" value={`${result.city}, ${result.regionName}`} />
+                <ResultCard label="ISP" value={result.isp} />
+              </div>
+            ) : (
+              <div
+                className="stagger-children"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: 10,
+                }}
+              >
+                <ResultCard label="Country" value={`${result.country} (${result.countryCode})`} />
+                <ResultCard label="City" value={`${result.city}, ${result.regionName}`} />
+                <ResultCard label="Timezone" value={result.timezone} />
+                <ResultCard label="ISP" value={result.isp} />
+                <ResultCard label="ASN" value={result.as} />
+                <ResultCard label="ZIP / Currency" value={`${result.zip || '—'} · ${result.currency}`} />
+              </div>
+            )}
 
             {/* Map */}
             <IPMap lat={result.lat} lon={result.lon} city={result.city} />
