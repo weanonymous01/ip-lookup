@@ -9,42 +9,42 @@
 
 ---
 
-## 🌟 Overview
+## Overview
 
 **IP Intelligence Lookup** is a zero-friction, privacy-first cybersecurity tool that provides instant network visibility for any IP address or domain name. Designed with a sleek dark aesthetic (`#080808` background & `#111111` elevated cards), it features real-time geolocation, ISP and ASN inspection, threat flag detection (VPN/Proxy/Datacenter/Mobile), and an interactive dark-themed map.
 
-### 🌐 Live Application
+### Live Application
 - **Main Tool**: [https://tools.bugwrite.com](https://tools.bugwrite.com)
 - **About Tool**: [https://tools.bugwrite.com/about](https://tools.bugwrite.com/about)
 - **Terms & Policies**: [https://tools.bugwrite.com/about/terms](https://tools.bugwrite.com/terms)
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-- 🎯 **Dual Mode Intelligence (IP & Domain)**
+- **Dual Mode Intelligence (IP & Domain)**
   - **IP Search**: Geolocation, ISP, ASN, Timezone, City, Country, ZIP & Currency.
   - **Domain Search**: Automatic domain name resolution (`google.com` → `142.251.10.100`), Reverse DNS hostname inspection, and registered Organization details.
-- 🛡️ **Instant Threat Flags**
+- **Instant Threat Flags**
   - Detects **Proxy / VPN** exit nodes.
   - Highlights **Hosting / Datacenter** ranges.
   - Flags **Mobile Connection** network endpoints.
-- 🗺️ **Interactive Dark Map**
+- **Interactive Dark Map**
   - Powered by **Leaflet.js** and **CartoDB Dark Matter** tiles.
   - Custom animated glowing marker pin indicating target coordinates.
-- 🌓 **Dark & Light Theme System**
+- **Dark & Light Theme System**
   - Dark mode by default (`#080808` / `#111111`) with smooth theme toggle.
   - High-contrast typography optimized for security analysts.
-- ⚡ **Stateless Serverless Proxy & RAM Caching**
+- **Stateless Serverless Proxy & RAM Caching**
   - Prevents CORS / HTTPS mixed-content issues.
   - Auto-extracts real caller IP via `x-forwarded-for` headers for "Check my own IP".
   - In-memory 5-minute TTL cache to respect upstream rate limits.
-- 📱 **Fully Responsive & SEO Optimized**
+- **Fully Responsive & SEO Optimized**
   - Built with Next.js 16 App Router, OpenGraph cards, and semantic HTML structure.
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 | Component | Technology | Description |
 |---|---|---|
@@ -57,7 +57,7 @@
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ip-lookup/
@@ -84,7 +84,7 @@ ip-lookup/
 
 ---
 
-## ⚡ Getting Started Locally
+## Getting Started Locally
 
 ### Prerequisites
 - **Node.js**: v18.17.0 or higher
@@ -110,7 +110,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🚀 Build & Deployment
+## Build & Deployment
 
 ### Build for Production
 To test the production build locally:
@@ -127,7 +127,7 @@ npm run start
 
 ---
 
-## 🔒 Privacy & Security Policy
+## Privacy & Security Policy
 
 - **Stateless Proxying**: We do not store, log, or track searched IP addresses or domain queries.
 - **No User Tracking**: No cookies, session tracking, or external analytics scripts are used.
@@ -135,6 +135,6 @@ npm run start
 
 ---
 
-## 🤝 Community & Credits
+## Community & Credits
 
 Built with ❤️ for the cybersecurity community by **[weanonymous.in](https://weanonymous.in)**.
