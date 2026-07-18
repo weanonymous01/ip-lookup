@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const FIELDS =
-  'status,country,countryCode,regionName,city,zip,lat,lon,timezone,currency,isp,org,as,asname,proxy,hosting,mobile,query'
+  'status,country,countryCode,regionName,city,zip,lat,lon,timezone,currency,isp,org,as,asname,proxy,hosting,mobile,query,reverse'
 
 // Simple in-memory cache
 const cache = new Map<string, { data: unknown; timestamp: number }>()
@@ -55,6 +55,9 @@ export async function GET(request: NextRequest) {
     }
 
     const data = await res.json()
+    if (query) {
+      data.searchedHost = query
+    }
 
     // Store in cache (keep max 50 entries)
     if (cache.size >= 50) {

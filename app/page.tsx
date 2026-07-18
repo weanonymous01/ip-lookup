@@ -32,6 +32,8 @@ interface IPData {
   hosting: boolean
   mobile: boolean
   query: string
+  reverse?: string
+  searchedHost?: string
 }
 
 export default function Home() {
@@ -250,11 +252,20 @@ export default function Home() {
         {result && !loading && (
           <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
-            {/* Queried IP + Actions */}
+            {/* Queried Target + Actions */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
               <span className="queried-ip">
-                <span style={{ color: 'rgba(11, 11, 15, 0.6)', fontFamily: 'inherit', fontWeight: 600 }}>IP</span>
-                {result.query}
+                {result.searchedHost && result.searchedHost !== result.query ? (
+                  <>
+                    <span style={{ color: 'rgba(11, 11, 15, 0.6)', fontFamily: 'inherit', fontWeight: 600 }}>DOMAIN</span>
+                    {result.searchedHost} <span style={{ opacity: 0.5 }}>({result.query})</span>
+                  </>
+                ) : (
+                  <>
+                    <span style={{ color: 'rgba(11, 11, 15, 0.6)', fontFamily: 'inherit', fontWeight: 600 }}>IP</span>
+                    {result.query}
+                  </>
+                )}
               </span>
               <div style={{ display: 'flex', gap: 6 }}>
                 <button
@@ -291,6 +302,9 @@ export default function Home() {
               <ResultCard label="Timezone" value={result.timezone} />
               <ResultCard label="ISP" value={result.isp} />
               <ResultCard label="ASN" value={result.as} />
+              <ResultCard label="Hostname / Reverse DNS" value={result.reverse || result.searchedHost || '—'} />
+              <ResultCard label="Resolved IP" value={result.query} />
+              <ResultCard label="Organization" value={result.org || result.asname || '—'} />
               <ResultCard label="ZIP / Currency" value={`${result.zip || '—'} · ${result.currency}`} />
             </div>
 
