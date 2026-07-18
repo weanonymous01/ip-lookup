@@ -3,23 +3,41 @@ import { NextRequest, NextResponse } from 'next/server'
 const FIELDS =
   'status,country,countryCode,regionName,city,zip,lat,lon,timezone,currency,isp,org,as,asname,proxy,hosting,mobile,query'
 
-// Simple in-memory cache (survives across requests in the same serverless instance)
+// Simple in-memory cache
 const cache = new Map<string, { data: unknown; timestamp: number }>()
 const CACHE_TTL = 5 * 60 * 1000 // 5 minutes
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
-  const query = searchParams.get('q') || ''
+  const query = searchParams.get('q')?.trim() || ''
+
+  let targetIp = query
+
+  // If query is empty, extract the caller's real public IP from Vercel headers
+  if (!targetIp) {
+    const forwarded = request.headers.get('x-forwarded-for')
+    const realIp = request.headers.get('x-real-ip')
+    const cfIp = request.headers.get('cf-connecting-ip')
+
+    const clientIp = (forwarded ? forwarded.split(',')[0].trim() : (realIp || cfIp || '')).trim()
+
+    if (clientIp && clientIp !== '127.0.0.1' && clientIp !== '::1' && !clientIp.startsWith('192.168.') && !clientIp.startsWith('10.')) {
+      targetIp = clientIp
+    }
+  }
+
+  // Use targetIp as cache key to prevent user IP collision in cache
+  const cacheKey = targetIp || 'own-ip'
 
   // Check cache first
-  const cached = cache.get(query)
+  const cached = cache.get(cacheKey)
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
     return NextResponse.json(cached.data)
   }
 
-  // Build ip-api URL (HTTP is fine from server side — no mixed-content issue)
-  const url = query
-    ? `http://ip-api.com/json/${encodeURIComponent(query)}?fields=${FIELDS}`
+  // Build ip-api URL
+  const url = targetIp
+    ? `http://ip-api.com/json/${encodeURIComponent(targetIp)}?fields=${FIELDS}`
     : `http://ip-api.com/json/?fields=${FIELDS}`
 
   try {
@@ -38,12 +56,12 @@ export async function GET(request: NextRequest) {
 
     const data = await res.json()
 
-    // Store in cache (evict oldest when over 50 entries)
+    // Store in cache (keep max 50 entries)
     if (cache.size >= 50) {
       const firstKey = cache.keys().next().value
       if (firstKey !== undefined) cache.delete(firstKey)
     }
-    cache.set(query, { data, timestamp: Date.now() })
+    cache.set(cacheKey, { data, timestamp: Date.now() })
 
     return NextResponse.json(data)
   } catch {
