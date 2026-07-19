@@ -56,7 +56,7 @@ export function generateReport(data: CorrelatedData): InvestigationReport {
   // ─── Key Findings ───
   if (data.findings.length > 0) {
     const sortedFindings = [...data.findings].sort((a, b) => {
-      const order = { critical: 0, high: 1, medium: 2, low: 3 }
+      const order = { critical: 0, high: 1, medium: 2, low: 3, info: 4 }
       return order[a.severity] - order[b.severity]
     })
 

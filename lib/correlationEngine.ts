@@ -31,7 +31,7 @@ export interface TimelineEvent {
 export interface Finding {
   title: string
   description: string
-  severity: 'low' | 'medium' | 'high' | 'critical'
+  severity: 'critical' | 'high' | 'medium' | 'low' | 'info'
   source: string
 }
 
