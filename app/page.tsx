@@ -298,9 +298,9 @@ export default function Home() {
                   gap: 10,
                 }}
               >
-                <ResultCard label="Hostname / Reverse DNS" value={result.reverse || result.searchedHost || '—'} />
+                <ResultCard label="Hostname / Reverse DNS" value={result.reverse || result.searchedHost || '-'} />
                 <ResultCard label="Resolved IP" value={result.query} />
-                <ResultCard label="Organization" value={result.org || result.asname || '—'} />
+                <ResultCard label="Organization" value={result.org || result.asname || '-'} />
                 <ResultCard label="Country" value={`${result.country} (${result.countryCode})`} />
                 <ResultCard label="City" value={`${result.city}, ${result.regionName}`} />
                 <ResultCard label="ISP" value={result.isp} />
@@ -318,8 +318,8 @@ export default function Home() {
                 <ResultCard label="City" value={`${result.city}, ${result.regionName}`} />
                 <ResultCard label="Timezone" value={result.timezone} />
                 <ResultCard label="ISP" value={result.isp} />
-                <ResultCard label="ASN" value={result.as} />
-                <ResultCard label="ZIP / Currency" value={`${result.zip || '—'} · ${result.currency}`} />
+                <ResultCard label="Region / State" value={`${result.regionName} (${result.region})`} />
+                <ResultCard label="ZIP / Currency" value={`${result.zip || '-'} · ${result.currency}`} />
               </div>
             )}
 
@@ -347,6 +347,10 @@ export default function Home() {
           <div style={{ display: 'flex', justifyContent: 'center', gap: 16, fontSize: 12, marginBottom: 12 }}>
             <Link href="/" style={{ color: 'var(--text-secondary)', textDecoration: 'underline' }}>
               Home
+            </Link>
+            <span style={{ color: 'var(--text-faint)' }}>·</span>
+            <Link href="/investigate" style={{ color: 'var(--text-secondary)', textDecoration: 'underline' }}>
+              Investigate
             </Link>
             <span style={{ color: 'var(--text-faint)' }}>·</span>
             <Link href="/about" style={{ color: 'var(--text-secondary)', textDecoration: 'underline' }}>

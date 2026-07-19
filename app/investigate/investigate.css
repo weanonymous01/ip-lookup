@@ -1,0 +1,510 @@
+/* ── OSINT Investigation Tool — Page Styles ── */
+
+/* ── Progress Steps ── */
+.investigate-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--paper-elevated);
+  border: 1px solid var(--ink-muted);
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.progress-step.active {
+  border-color: var(--lime);
+  color: var(--ink);
+  background: var(--lime-dim);
+}
+
+.progress-step.done {
+  border-color: var(--safe-border);
+  color: var(--safe-color);
+}
+
+.progress-step.error {
+  border-color: rgba(255, 107, 107, 0.2);
+  color: var(--danger);
+}
+
+.progress-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.progress-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--lime-dim);
+  border-top-color: var(--lime);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+/* ── Type Indicator Badge ── */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: var(--lime-dim);
+  color: var(--lime);
+  border: 1px solid rgba(245, 255, 196, 0.2);
+  animation: fadeIn 0.3s ease both;
+}
+
+/* ── Report Container ── */
+.report-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeInUp 0.5s ease both;
+}
+
+/* ── Report Header ── */
+.report-header {
+  text-align: center;
+  padding: 32px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--ink-muted);
+  background: var(--paper-elevated);
+  position: relative;
+  overflow: hidden;
+}
+
+.report-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, var(--card-shine));
+  pointer-events: none;
+}
+
+.report-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.report-target {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  word-break: break-all;
+}
+
+.report-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* ── Risk Badge ── */
+.risk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 16px auto 0;
+  letter-spacing: 0.02em;
+}
+
+.risk-badge.green {
+  background: var(--safe-bg);
+  color: var(--safe-color);
+  border: 1.5px solid var(--safe-border);
+}
+
+.risk-badge.yellow {
+  background: rgba(250, 204, 21, 0.12);
+  color: #facc15;
+  border: 1.5px solid rgba(250, 204, 21, 0.25);
+}
+
+.risk-badge.red {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1.5px solid rgba(255, 68, 68, 0.25);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* ── Report Section ── */
+.report-section {
+  background: var(--paper-elevated);
+  border: 1px solid var(--ink-muted);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.report-section:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+.report-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink-muted);
+  background: linear-gradient(135deg, transparent 60%, var(--card-shine));
+}
+
+.report-section-icon {
+  font-size: 18px;
+}
+
+.report-section-body {
+  padding: 16px 20px;
+}
+
+.report-section-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.report-section-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.report-section-items li {
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding: 10px 14px;
+  background: var(--paper);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--ink-muted);
+  line-height: 1.5;
+  word-break: break-word;
+  transition: border-color var(--transition);
+}
+
+.report-section-items li:hover {
+  border-color: var(--lime);
+}
+
+/* Severity highlights for items */
+.report-section.severity-critical {
+  border-color: rgba(255, 68, 68, 0.25);
+}
+
+.report-section.severity-high {
+  border-color: rgba(251, 146, 60, 0.25);
+}
+
+.report-section.severity-medium {
+  border-color: rgba(250, 204, 21, 0.25);
+}
+
+/* ── Raw Data Toggle ── */
+.raw-data-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: none;
+  border: 1.5px dashed var(--ink-muted);
+  border-radius: var(--radius);
+  color: var(--text-tertiary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: all var(--transition);
+}
+
+.raw-data-toggle:hover {
+  border-color: var(--lime);
+  color: var(--lime);
+}
+
+.raw-data-content {
+  background: var(--paper-elevated);
+  border: 1px solid var(--ink-muted);
+  border-radius: var(--radius);
+  padding: 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+/* ── Action Buttons Row ── */
+.report-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+/* ── Input Hint Text ── */
+.input-hints {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.input-hint {
+  font-size: 11px;
+  color: var(--text-faint);
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--ink-muted);
+  background: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: 'Courier New', monospace;
+}
+
+.input-hint:hover {
+  border-color: var(--lime);
+  color: var(--lime);
+  background: var(--lime-dim);
+}
+
+/* ── Scanning animation ── */
+@keyframes scanLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scan-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(245, 255, 196, 0.05) 50%,
+    transparent 100%
+  );
+  animation: scanLine 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .report-section-header {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  .report-section-body {
+    padding: 12px 14px;
+  }
+
+  .report-header {
+    padding: 24px 16px;
+  }
+
+  .risk-badge {
+    font-size: 12px;
+    padding: 8px 18px;
+  }
+
+  .report-view-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ai-report-content {
+    padding: 20px 16px !important;
+  }
+}
+
+/* ── Report View Toggle ── */
+.report-view-toggle {
+  display: flex;
+  gap: 0;
+  border-radius: 100px;
+  border: 1.5px solid var(--ink-muted);
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.view-toggle-btn {
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  background: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.view-toggle-btn.active {
+  background: var(--lime);
+  color: #080808;
+}
+
+.view-toggle-btn:not(.active):hover {
+  color: var(--ink);
+  background: var(--lime-dim);
+}
+
+/* ── AI Report Container ── */
+.ai-report-container {
+  background: var(--paper-elevated);
+  border: 1px solid var(--ink-muted);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.ai-report-content {
+  padding: 28px 24px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.ai-report-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--ink-muted);
+  font-size: 11px;
+  color: var(--text-faint);
+  text-align: center;
+  background: var(--paper);
+}
+
+/* ── AI Markdown Styles ── */
+.ai-report-content .ai-h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 32px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ink-muted);
+  line-height: 1.3;
+}
+
+.ai-report-content .ai-h1:first-child {
+  margin-top: 0;
+}
+
+.ai-report-content .ai-h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--lime);
+  margin: 28px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--ink-muted);
+  line-height: 1.3;
+}
+
+.ai-report-content .ai-h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 20px 0 8px;
+  line-height: 1.3;
+}
+
+.ai-report-content .ai-p {
+  margin: 8px 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.ai-report-content .ai-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-report-content .ai-list li {
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding: 10px 14px;
+  background: var(--paper);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--ink-muted);
+  line-height: 1.5;
+  word-break: break-word;
+  transition: border-color var(--transition);
+}
+
+.ai-report-content .ai-list li:hover {
+  border-color: var(--lime);
+}
+
+.ai-report-content .ai-code {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 2px 6px;
+  background: var(--lime-dim);
+  border-radius: 4px;
+  color: var(--lime);
+}
+
+.ai-report-content .ai-hr {
+  border: none;
+  border-top: 1px solid var(--ink-muted);
+  margin: 24px 0;
+}
+
+.ai-report-content strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.ai-report-content em {
+  font-style: italic;
+  color: var(--text-secondary);
+}
